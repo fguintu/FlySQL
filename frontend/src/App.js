@@ -1,3 +1,4 @@
+/*
 import React, { useEffect, useMemo, useState } from "react";
 import axios from "axios";
 import { BrowserRouter, Routes, Route, Link, useSearchParams } from "react-router-dom";
@@ -6,6 +7,15 @@ import {
   Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend,
 } from "chart.js";
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
+*/
+
+import React, { useEffect, useMemo, useState } from "react";
+import axios from "axios";
+import { BrowserRouter, Routes, Route, Link, useSearchParams } from "react-router-dom";
+import { Bar } from "react-chartjs-2";
+import IterativeSQL from "./pages/IterativeSQL";
+import DbOptimizations from "./pages/DbOptimizations";
+import OneShotChat from "./pages/OneShotChat";
 
 const API = process.env.REACT_APP_API_URL || "http://localhost:5000";
 
@@ -117,12 +127,18 @@ export default function App() {
         <nav style={{ marginBottom: 12 }}>
           <Link to="/">Flights</Link> ·{" "}
           <Link to="/search">Search</Link> ·{" "}
-          <Link to="/visuals">Visuals</Link>
+          <Link to="/visuals">Visuals</Link> ·{" "}
+          <Link to="/iterative">Iterative SQL</Link> ·{" "}
+          <Link to="/dbms">DB Optimizations</Link>
+          <Link to="/chat">One-shot Chat</Link>
         </nav>
         <Routes>
           <Route path="/" element={<FlightsPage />} />
           <Route path="/search" element={<SearchPage />} />
           <Route path="/visuals" element={<VisualsPage />} />
+          <Route path="/iterative" element={<IterativeSQL />} />
+          <Route path="/dbms" element={<DbOptimizations />} />
+          <Route path="/chat" element={<OneShotChat />} />
         </Routes>
       </div>
     </BrowserRouter>
