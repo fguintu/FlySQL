@@ -1,11 +1,10 @@
 import React, { useEffect, useMemo, useState } from "react";
 import axios from "axios";
-import { BrowserRouter, Routes, Route, Link, useSearchParams } from "react-router-dom";
+import { BrowserRouter, Routes, Route, NavLink, Link, useSearchParams } from "react-router-dom";
 import { Bar } from "react-chartjs-2";
-import {
-  Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend,
-} from "chart.js";
-ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
+import IterativeSQL from "./pages/IterativeSQL";
+import DbOptimizations from "./pages/DbOptimizations";
+import OneShotChat from "./pages/OneShotChat";
 
 const API = process.env.REACT_APP_API_URL || "http://localhost:5000";
 
@@ -114,15 +113,21 @@ export default function App() {
     <BrowserRouter>
       <div style={{ padding: 16 }}>
         <h1>AirportDB Interactive</h1>
-        <nav style={{ marginBottom: 12 }}>
-          <Link to="/">Flights</Link> ·{" "}
-          <Link to="/search">Search</Link> ·{" "}
-          <Link to="/visuals">Visuals</Link>
+        <nav className="topnav">
+          <NavLink to="/" end className={({isActive}) => isActive ? "navlink active" : "navlink"}>Flights</NavLink>
+          <NavLink to="/search" className={({isActive}) => isActive ? "navlink active" : "navlink"}>Search</NavLink>
+          <NavLink to="/visuals" className={({isActive}) => isActive ? "navlink active" : "navlink"}>Visuals</NavLink>
+          <NavLink to="/iterative" className={({isActive}) => isActive ? "navlink active" : "navlink"}>Iterative SQL</NavLink>
+          <NavLink to="/dbms" className={({isActive}) => isActive ? "navlink active" : "navlink"}>DB Optimizations</NavLink>
+          <NavLink to="/chat" className={({isActive}) => isActive ? "navlink active" : "navlink"}>One-shot Chat</NavLink>
         </nav>
         <Routes>
           <Route path="/" element={<FlightsPage />} />
           <Route path="/search" element={<SearchPage />} />
           <Route path="/visuals" element={<VisualsPage />} />
+          <Route path="/iterative" element={<IterativeSQL />} />
+          <Route path="/dbms" element={<DbOptimizations />} />
+          <Route path="/chat" element={<OneShotChat />} />
         </Routes>
       </div>
     </BrowserRouter>

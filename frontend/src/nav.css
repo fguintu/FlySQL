@@ -1,0 +1,29 @@
+.topnav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 14px;   /* spacing between tabs */
+  margin-bottom: 12px;
+}
+
+.navlink {
+  text-decoration: none;
+  color: #222;
+  border: 1px solid #ddd;
+  background: #f8f8f8;
+  padding: 6px 10px;
+  border-radius: 999px;   /* pill style */
+  font-size: 0.95rem;
+  line-height: 1;
+}
+
+.navlink:hover {
+  background: #111;
+  color: #fff;
+  border-color: #111;
+}
+
+.navlink.active {
+  background: #111;
+  color: #fff;
+  border-color: #111;
+}
