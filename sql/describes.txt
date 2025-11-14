@@ -1,0 +1,237 @@
++-----------------------------+
+| Tables_in_flughafendb_large |
++-----------------------------+
+| airline                     |
+| airplane                    |
+| airplane_type               |
+| airport                     |
+| airport_geo                 |
+| airport_reachable           |
+| booking                     |
+| employee                    |
+| flight                      |
+| flight_log                  |
+| flightschedule              |
+| passenger                   |
+| passengerdetails            |
+| weatherdata                 |
++-----------------------------+
+SELECT 
+TABLE_NAME,
+COLUMN_NAME,
+COLUMN_TYPE,
+COLUMN_KEY
+FROM information_schema.columns
+WHERE table_schema = 'flughafendb_large'
+ORDER BY TABLE_NAME, ORDINAL_POSITION;
+
++-------------------+-----------------+-------------------------------------------------------------------------------------------------------------------------------------------+------------+
+| TABLE_NAME        | COLUMN_NAME     | COLUMN_TYPE                                                                                            
+                                   | COLUMN_KEY |
++-------------------+-----------------+-------------------------------------------------------------------------------------------------------------------------------------------+------------+
+| airline           | airline_id      | smallint                                                                                               
+                                   | PRI        |
+| airline           | iata            | char(2)                                                                                                
+                                   | UNI        |
+| airline           | airlinename     | varchar(30)                                                                                            
+                                   |            |
+| airline           | base_airport    | smallint                                                                                               
+                                   | MUL        |
+| airplane          | airplane_id     | int                                                                                                    
+                                   | PRI        |
+| airplane          | capacity        | mediumint unsigned                                                                                     
+                                   |            |
+| airplane          | type_id         | int                                                                                                    
+                                   |            |
+| airplane          | airline_id      | int                                                                                                    
+                                   |            |
+| airplane_type     | type_id         | int                                                                                                    
+                                   | PRI        |
+| airplane_type     | identifier      | varchar(50)                                                                                            
+                                   | MUL        |
+| airplane_type     | description     | text                                                                                                   
+                                   |            |
+| airport           | airport_id      | smallint                                                                                               
+                                   | PRI        |
+| airport           | iata            | char(3)                                                                                                
+                                   | MUL        |
+| airport           | icao            | char(4)                                                                                                
+                                   | UNI        |
+| airport           | name            | varchar(50)                                                                                            
+                                   | MUL        |
+| airport_geo       | airport_id      | smallint                                                                                               
+                                   | MUL        |
+| airport_geo       | name            | varchar(50)                                                                                            
+                                   |            |
+| airport_geo       | city            | varchar(50)                                                                                            
+                                   |            |
+| airport_geo       | country         | varchar(50)                                                                                            
+                                   |            |
+| airport_geo       | latitude        | decimal(11,8)                                                                                          
+                                   |            |
+| airport_geo       | longitude       | decimal(11,8)                                                                                          
+                                   |            |
+| airport_geo       | geolocation     | point                                                                                                  
+                                   | MUL        |
+| airport_reachable | airport_id      | int                                                                                                    
+                                   | PRI        |
+| airport_reachable | hops            | int                                                                                                    
+                                   |            |
+| booking           | booking_id      | int                                                                                                    
+                                   | PRI        |
+| booking           | flight_id       | int                                                                                                    
+                                   | MUL        |
+| booking           | seat            | char(4)                                                                                                
+                                   |            |
+| booking           | passenger_id    | int                                                                                                    
+                                   | MUL        |
+| booking           | price           | decimal(10,2)                                                                                                                             |            |
+| employee          | employee_id     | int                                                                                                    
+                                   | PRI        |
+| employee          | firstname       | varchar(100)                                                                                           
+                                   |            |
+| employee          | lastname        | varchar(100)                                                                                           
+                                   |            |
+| employee          | birthdate       | date                                                                                                   
+                                   |            |
+| employee          | sex             | char(1)                                                                                                
+                                   |            |
+| employee          | street          | varchar(100)                                                                                           
+                                   |            |
+| employee          | city            | varchar(100)                                                                                           
+                                   |            |
+| employee          | zip             | smallint                                                                                               
+                                   |            |
+| employee          | country         | varchar(100)                                                                                           
+                                   |            |
+| employee          | emailaddress    | varchar(120)                                                                                           
+                                   |            |
+| employee          | telephoneno     | varchar(30)                                                                                            
+                                   |            |
+| employee          | salary          | decimal(8,2)                                                                                           
+                                   |            |
+| employee          | department      | enum('Marketing','Buchhaltung','Management','Logistik','Flugfeld')                                     
+                                   |            |
+| employee          | username        | varchar(20)                                                                                            
+                                   | UNI        |
+| employee          | password        | char(32)                                                                                               
+                                   |            |
+| flight            | flight_id       | int                                                                                                    
+                                   | PRI        |
+| flight            | flightno        | char(8)                                                                                                
+                                   |            |
+| flight            | from            | smallint                                                                                               
+                                   | MUL        |
+| flight            | to              | smallint                                                                                               
+                                   | MUL        |
+| flight            | departure       | datetime                                                                                               
+                                   | MUL        |
+| flight            | arrival         | datetime                                                                                               
+                                   | MUL        |
+| flight            | airline_id      | smallint                                                                                               
+                                   | MUL        |
+| flight            | airplane_id     | int                                                                                                                                       | MUL        |
+| flight_log        | log_date        | datetime                                                                                               
+                                   |            |
+| flight_log        | user            | varchar(100)                                                                                           
+                                   |            |
+| flight_log        | flight_id       | int                                                                                                    
+                                   |            |
+| flight_log        | flightno_old    | char(8)                                                                                                
+                                   |            |
+| flight_log        | flightno_new    | char(8)                                                                                                
+                                   |            |
+| flight_log        | from_old        | smallint                                                                                               
+                                   |            |
+| flight_log        | to_old          | smallint                                                                                               
+                                   |            |
+| flight_log        | from_new        | smallint                                                                                               
+                                   |            |
+| flight_log        | to_new          | smallint                                                                                               
+                                   |            |
+| flight_log        | departure_old   | datetime                                                                                               
+                                   |            |
+| flight_log        | arrival_old     | datetime                                                                                               
+                                   |            |
+| flight_log        | departure_new   | datetime                                                                                               
+                                   |            |
+| flight_log        | arrival_new     | datetime                                                                                               
+                                   |            |
+| flight_log        | airplane_id_old | int                                                                                                    
+                                   |            |
+| flight_log        | airplane_id_new | int                                                                                                    
+                                   |            |
+| flight_log        | airline_id_old  | smallint                                                                                               
+                                   |            |
+| flight_log        | airline_id_new  | smallint                                                                                               
+                                   |            |
+| flight_log        | comment         | varchar(200)                                                                                           
+                                   |            |
+| flightschedule    | flightno        | char(8)                                                                                                
+                                   | PRI        |
+| flightschedule    | from            | smallint                                                                                               
+                                   | MUL        |
+| flightschedule    | to              | smallint                                                                                               
+                                   | MUL        |
+| flightschedule    | departure       | time                                                                                                   
+                                   |            |
+| flightschedule    | arrival         | time                                                                                                   
+                                   |            |
+| flightschedule    | airline_id      | smallint                                                                                               
+                                   | MUL        |
+| flightschedule    | monday          | tinyint(1)                                                                                             
+                                   |            |
+| flightschedule    | tuesday         | tinyint(1)                                                                                                                                |            |
+| flightschedule    | wednesday       | tinyint(1)                                                                                             
+                                   |            |
+| flightschedule    | thursday        | tinyint(1)                                                                                             
+                                   |            |
+| flightschedule    | friday          | tinyint(1)                                                                                             
+                                   |            |
+| flightschedule    | saturday        | tinyint(1)                                                                                             
+                                   |            |
+| flightschedule    | sunday          | tinyint(1)                                                                                             
+                                   |            |
+| passenger         | passenger_id    | int                                                                                                    
+                                   | PRI        |
+| passenger         | passportno      | char(9)                                                                                                
+                                   | UNI        |
+| passenger         | firstname       | varchar(100)                                                                                           
+                                   |            |
+| passenger         | lastname        | varchar(100)                                                                                           
+                                   |            |
+| passengerdetails  | passenger_id    | int                                                                                                    
+                                   | PRI        |
+| passengerdetails  | birthdate       | date                                                                                                   
+                                   |            |
+| passengerdetails  | sex             | char(1)                                                                                                
+                                   |            |
+| passengerdetails  | street          | varchar(100)                                                                                                                              |            |
+| passengerdetails  | city            | varchar(100)                                                                                           
+                                   |            |
+| passengerdetails  | zip             | smallint                                                                                               
+                                   |            |
+| passengerdetails  | country         | varchar(100)                                                                                           
+                                   |            |
+| passengerdetails  | emailaddress    | varchar(120)                                                                                           
+                                   |            |
+| passengerdetails  | telephoneno     | varchar(30)                                                                                            
+                                   |            |
+| weatherdata       | log_date        | date                                                                                                   
+                                   | PRI        |
+| weatherdata       | time            | time                                                                                                   
+                                   | PRI        |
+| weatherdata       | station         | int                                                                                                    
+                                   | PRI        |
+| weatherdata       | temp            | decimal(3,1)                                                                                           
+                                   |            |
+| weatherdata       | humidity        | decimal(4,1)                                                                                           
+                                   |            |
+| weatherdata       | airpressure     | decimal(10,2)                                                                                          
+                                   |            |
+| weatherdata       | wind            | decimal(5,2)                                                                                           
+                                   |            |
+| weatherdata       | weather         | enum('Nebel-Schneefall','Schneefall','Regen','Regen-Schneefall','Nebel-Regen','Nebel-Regen-Gewitter','Gewitter','Nebel','Regen-Gewitter') |            |
+| weatherdata       | winddirection   | smallint                                                                                               
+                                   |            |
++-------------------+-----------------+-------------------------------------------------------------------------------------------------------------------------------------------+------------+
