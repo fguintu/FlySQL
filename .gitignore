@@ -139,7 +139,9 @@ vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 
 # Python
+venv/
 backend/venv/
+*/venv/
 
 # environment variables
 backend/.env
