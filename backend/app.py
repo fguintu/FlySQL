@@ -83,8 +83,11 @@ HISTORY = []   # last N queries (metadata only)
 BOOKMARKS = [] # [{name, sql, params}]
 
 app = Flask(__name__)
-CORS(app)  # allow localhost:3000 to talk to 5000
-
+CORS(app, resources={r"/api/*": {
+    "origins": "*",
+    "methods": ["GET", "POST", "OPTIONS"],
+    "allow_headers": ["Content-Type"]
+}})
 # ---------- Health / setup ----------
 @app.route("/api/health")
 def health():

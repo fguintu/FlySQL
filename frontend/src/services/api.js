@@ -3,8 +3,10 @@ import axios from "axios";
 const ROOT = process.env.REACT_APP_API_URL || "http://localhost:5000";
 const BASE = `${ROOT}/api`;
 
-export const runQuery = (sql, params = {}, page = 1, page_size) =>
-  axios.post(`${BASE}/query`, { sql, params, page, page_size }).then(r => r.data);
+export const runQuery = (sql, params = {}, page = 1, page_size = 100) =>
+  axios
+    .post(`${BASE}/query`, { sql, params, page, page_size })
+    .then(r => r.data);
 
 export const getHistory = () =>
   axios.get(`${BASE}/history`).then(r => r.data);
