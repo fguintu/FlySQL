@@ -293,5 +293,37 @@ def api_nl2sql():
     # Fallback: a safe default the user can edit
     return jsonify({"sql": "SELECT flight_id, flightno, departure, arrival FROM flight LIMIT 100", "params": {}})
 
+@app.get("/api/visuals/flight_density")
+def flight_density():
+    date_from = request.args.get("date_from")
+    date_to = request.args.get("date_to")
+    min_count = request.args.get("min_count", 10)  # DEFAULT to 10 flights
+
+    sql = """
+    SELECT
+        ANY_VALUE(from_airport) AS from_airport,
+        ANY_VALUE(from_city) AS from_city,
+        ANY_VALUE(from_country) AS from_country,
+        ANY_VALUE(from_lat) AS from_lat,
+        ANY_VALUE(from_lng) AS from_lng,
+
+        ANY_VALUE(to_airport) AS to_airport,
+        ANY_VALUE(to_city) AS to_city,
+        ANY_VALUE(to_country) AS to_country,
+        ANY_VALUE(to_lat) AS to_lat,
+        ANY_VALUE(to_lng) AS to_lng,
+
+        SUM(flight_count) AS flight_count
+    FROM summary_route_density
+    WHERE flight_date BETWEEN %s AND %s
+    GROUP BY from_airport, to_airport
+    HAVING SUM(flight_count) >= %s
+    ORDER BY flight_count DESC;
+    """
+
+    rows = run_query(sql, (date_from, date_to, min_count))
+    return jsonify(rows)
+
+
 if __name__ == "__main__":
     app.run(host="127.0.0.1", port=int(os.getenv("PORT", "5000")), debug=True)

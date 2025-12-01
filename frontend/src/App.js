@@ -6,6 +6,7 @@ import IterativeSQL from "./pages/IterativeSQL";
 import DbOptimizations from "./pages/DbOptimizations";
 import OneShotChat from "./pages/OneShotChat";
 import VisualExplorer from "./pages/VisualExplorer";
+import FlightDensityMap from "./pages/FlightDensityMap";
 import "./schema.css";
 
 const API = process.env.REACT_APP_API_URL || "http://localhost:5000";
@@ -123,6 +124,7 @@ export default function App() {
           <NavLink to="/dbms" className={({isActive}) => isActive ? "navlink active" : "navlink"}>DB Optimizations</NavLink>
           <NavLink to="/chat" className={({isActive}) => isActive ? "navlink active" : "navlink"}>One-shot Chat</NavLink>
           <NavLink to="/visuals" className={({isActive}) => isActive ? "navlink active" : "navlink"}>Visuals</NavLink>
+          <NavLink to="/density" className={({isActive}) => isActive ? "navlink active" : "navlink"}>Density Map</NavLink>
         </nav>
         <Routes>
           <Route path="/" element={<FlightsPage />} />
@@ -131,6 +133,7 @@ export default function App() {
           <Route path="/iterative" element={<IterativeSQL />} />
           <Route path="/dbms" element={<DbOptimizations />} />
           <Route path="/chat" element={<OneShotChat />} />
+          <Route path="/density" element={<FlightDensityMap />} />
         </Routes>
       </div>
     </BrowserRouter>
