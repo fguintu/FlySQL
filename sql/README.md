@@ -18,7 +18,8 @@ Our earliest implementation executed the following queries directly on the base 
 
 AVG(price) grouped by country
 
-Route density: COUNT(*) grouped by from and to airports and filtered by date```
+Route density: COUNT(*) grouped by from and to airports and filtered by date
+```
 
 Without any indexes, MySQL performed full table scans on the largest tables (e.g., booking, flight). As a result:
 
@@ -31,13 +32,14 @@ This made the interactive data exploration essentially impossible.
 
 Next, we added all appropriate indexes, including:
 
-``booking(flight_id, price)
+```booking(flight_id, price)
 
 flight(from, to, airline_id, departure)
 
 airport_geo(airport_id, country)
 
-airline(airline_id, airlinename)```
+airline(airline_id, airlinename)
+```
 
 These indexes significantly improved join and filter performance.
 
@@ -56,7 +58,8 @@ To achieve interactive performance, we created materialized summary tables:
 
 summary_price_country
 
-summary_route_density (daily route-level flight counts)```
+summary_route_density (daily route-level flight counts)
+```
 
 These tables are computed once using batch processing and indexed appropriately:
 
@@ -64,7 +67,8 @@ These tables are computed once using batch processing and indexed appropriately:
 
 summary_price_airline(airline_id)
 
-summary_price_country(country)```
+summary_price_country(country)
+```
 
 After switching the frontend features to query the summary tables:
 
