@@ -123,7 +123,6 @@ export default function App() {
           <NavLink to="/iterative" className={({isActive}) => isActive ? "navlink active" : "navlink"}>Iterative SQL</NavLink>
           <NavLink to="/dbms" className={({isActive}) => isActive ? "navlink active" : "navlink"}>DB Optimizations</NavLink>
           <NavLink to="/chat" className={({isActive}) => isActive ? "navlink active" : "navlink"}>One-shot Chat</NavLink>
-          <NavLink to="/visuals" className={({isActive}) => isActive ? "navlink active" : "navlink"}>Visuals</NavLink>
           <NavLink to="/density" className={({isActive}) => isActive ? "navlink active" : "navlink"}>Density Map</NavLink>
         </nav>
         <Routes>
