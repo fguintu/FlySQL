@@ -17,7 +17,12 @@ const TABLE_DEFS = {
   passenger: {
     label: "passenger",
     description: "Passengers and personal details",
-    columns: ["passenger_id", "firstname", "lastname", "birthdate", "sex"],
+    columns: [
+      "passenger_id",
+      "passportno",
+      "firstname",
+      "lastname",
+    ],
   },
   flight: {
     label: "flight",
