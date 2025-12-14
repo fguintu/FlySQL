@@ -151,9 +151,6 @@ export default function VisualExplorer() {
 
         <button onClick={fetchAirlines} style={btn}>Top Airlines</button>
         <button onClick={fetchCountries} style={btn}>Top Countries</button>
-        <button style={{ ...btn, background: "#444" }}>
-          ✈️ To/From Geolocation (Placeholder)
-        </button>
 
         <label style={{ marginLeft: 12 }}>Show Top:</label>
         <input
