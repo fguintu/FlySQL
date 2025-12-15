@@ -95,11 +95,11 @@ This architecture enables real-time exploration over a dataset that would otherw
 ## Getting Started
 
 1) Clone the repository
-
+```
 git clone https://github.com/fguintu/FlySQL.git
-
+```
 2) Database setup
-
+```
 Install and load the large Flughafen database into MySQL (e.g., flughafendb_large).
 
 Run the optimization scripts:
@@ -108,19 +108,19 @@ USE flughafendb_large;
 source indexes.sql
 source FlightDensity.sql
 source VisualExplorer.sql
-
+```
 3) Backend setup
-
+```
 cd backend
 pip install -r requirements.txt
 python app.py
-
+```
 4) Frontend setup
-
+```
 cd frontend
 npm ci
 npm start
-
+```
 Open the application:
 - Frontend: http://localhost:3000
 - Backend health check: http://localhost:5000/api/health
